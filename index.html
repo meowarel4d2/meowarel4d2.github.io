@@ -1,46 +1,11 @@
 <!DOCTYPE html>
-<html lang="es" class="scroll-smooth">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#a50018">
   <meta name="description" content="meoware — One step ahead of the game. Una parodia gaming hecha por diversión.">
   <title>meoware — One step ahead of the game</title>
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            redBrand: '#a40018',
-            redDark: '#72000e',
-            redLight: '#d20a27',
-            darkBg: '#090609',
-          },
-          animation: {
-            float: 'float 4s ease-in-out infinite',
-            pulseGlow: 'pulseGlow 3s ease-in-out infinite',
-            marquee: 'marquee 20s linear infinite',
-          },
-          keyframes: {
-            float: {
-              '0%, 100%': { transform: 'translateY(0px)' },
-              '50%': { transform: 'translateY(-10px)' },
-            },
-            pulseGlow: {
-              '0%, 100%': { opacity: '0.4', transform: 'scale(1)' },
-              '50%': { opacity: '0.8', transform: 'scale(1.05)' },
-            },
-            marquee: {
-              '0%': { transform: 'translateX(0%)' },
-              '100%': { transform: 'translateX(-50%)' }
-            }
-          }
-        }
-      }
-    }
-  </script>
   <style>
     :root {
       --red: #a40018;
@@ -51,230 +16,89 @@
       --panel: rgba(20, 0, 4, .62);
       --line: rgba(255,255,255,.14);
     }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
       margin: 0; color: var(--white);
-      background: #060407;
+      background: #090609;
       font-family: Inter, "Segoe UI", Arial, sans-serif;
-      overflow-x: hidden;
     }
     a { color: inherit; text-decoration: none; }
-    
-    /* Glassmorphism Topbar */
     .topbar {
-      position: sticky; top: 0; z-index: 50;
+      position: sticky; top: 0; z-index: 5;
       display: flex; justify-content: space-between; align-items: center;
-      padding: 18px clamp(18px, 5vw, 72px);
-      background: rgba(12, 4, 8, 0.75);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      transition: all 0.3s ease;
+      padding: 17px clamp(18px, 5vw, 72px);
+      background: rgba(12, 0, 3, .88);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(14px);
     }
-    .wordmark { font-weight: 950; letter-spacing: -.7px; font-size: 22px; transition: transform 0.2s; }
-    .wordmark:hover { transform: scale(1.02); }
-    .wordmark span { color: #ff6679; text-shadow: 0 0 12px rgba(255, 102, 121, 0.5); }
-    
+    .wordmark { font-weight: 950; letter-spacing: -.7px; font-size: 22px; }
+    .wordmark span { color: #ff6679; }
     .nav { display: flex; align-items: center; gap: 26px; font-size: 13px; color: #d7cdd0; }
-    .nav a { position: relative; transition: color 0.2s; }
-    .nav a:not(.nav-cta):after {
-      content: ''; position: absolute; width: 0; height: 2px; bottom: -4px; left: 0;
-      background: #ff6679; transition: width 0.3s ease;
-    }
-    .nav a:not(.nav-cta):hover:after { width: 100%; }
     .nav a:hover { color: white; }
-
-    /* Buttons with glowing and shine effects */
     .nav-cta, .btn {
       display: inline-flex; justify-content: center; align-items: center;
-      padding: 12px 22px; border: 1px solid rgba(255,255,255,.25);
-      border-radius: 8px; font-weight: 800; font-size: 12px;
-      text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      position: relative; overflow: hidden;
+      padding: 12px 18px; border: 1px solid rgba(255,255,255,.25);
+      border-radius: 4px; font-weight: 800; font-size: 12px;
+      text-transform: uppercase; letter-spacing: 1px; transition: .2s;
     }
-    .nav-cta::before, .btn::before {
-      content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-      transition: 0.5s;
-    }
-    .nav-cta:hover::before, .btn:hover::before { left: 100%; }
-    
-    .nav-cta, .btn-red { 
-      background: linear-gradient(135deg, #f5f1f2 0%, #e2d7d9 100%); 
-      color: #8d0015; border-color: rgba(255,255,255,0.8);
-      box-shadow: 0 4px 20px rgba(164, 0, 24, 0.3);
-    }
-    .btn:hover, .nav-cta:hover { 
-      transform: translateY(-3px) scale(1.02); 
-      box-shadow: 0 10px 30px rgba(210, 10, 39, 0.4); 
-    }
-    .btn-outline { 
-      background: rgba(57, 0, 9, 0.3); 
-      border-color: rgba(255, 255, 255, 0.3); 
-      backdrop-filter: blur(8px);
-    }
-    .btn-outline:hover {
-      background: rgba(164, 0, 24, 0.3);
-      border-color: rgba(255, 102, 121, 0.8);
-    }
-
-    /* Hero Section */
+    .nav-cta, .btn-red { background: #f5f1f2; color: #8d0015; border-color: #f5f1f2; }
+    .btn:hover, .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 28px #0007; }
     .hero {
-      min-height: 680px; position: relative; overflow: hidden;
+      min-height: 620px; position: relative; overflow: hidden;
       display: grid; place-items: center; text-align: center;
-      padding: 90px 20px 100px;
+      padding: 72px 20px 90px;
       background:
-        radial-gradient(circle at 50% 30%, rgba(255, 60, 82, 0.28) 0%, transparent 60%),
-        radial-gradient(circle at 20% 80%, rgba(114, 0, 14, 0.4) 0%, transparent 50%),
-        linear-gradient(145deg, #990017 0%, #680010 50%, #360007 100%);
+        radial-gradient(ellipse at 50% 34%, rgba(255,60,82,.22), transparent 52%),
+        linear-gradient(135deg, #a9001a 0%, #810013 55%, #4a000b 100%);
     }
-    .hero::before {
-      content: ""; position: absolute; inset: 0; opacity: .15; pointer-events: none;
-      background-image: radial-gradient(rgba(255,255,255,0.4) 1px, transparent 1px);
-      background-size: 32px 32px;
-      mask-image: linear-gradient(to bottom, black 60%, transparent 95%);
+    .hero:before {
+      content: ""; position: absolute; inset: 0; opacity: .12; pointer-events: none;
+      background-image: linear-gradient(135deg, transparent 49.5%, #fff 50%, transparent 50.5%);
+      background-size: 70px 70px;
+      mask-image: linear-gradient(to bottom, black, transparent 85%);
     }
-    .hero-inner { position: relative; max-width: 900px; z-index: 2; }
-    
+    .hero-inner { position: relative; max-width: 900px; }
     .notice {
-      display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; margin-bottom: 22px;
-      border: 1px solid rgba(255, 255, 255, 0.25); background: rgba(64, 0, 10, 0.5);
-      border-radius: 9999px; font-size: 10px; letter-spacing: 2px; font-weight: 900;
-      backdrop-filter: blur(8px); box-shadow: 0 0 20px rgba(164, 0, 24, 0.4);
-      animation: pulseGlow 3s infinite ease-in-out;
+      display: inline-block; padding: 8px 12px; margin-bottom: 18px;
+      border: 1px solid #ffffff55; background: #40000a44;
+      font-size: 10px; letter-spacing: 2px; font-weight: 900;
     }
-    .notice::before { content: '✦'; color: #ff6679; }
-    
-    .hero-logo { 
-      display: block; width: min(560px, 85vw); height: auto; margin: 0 auto 26px; 
-      filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.6));
-      animation: float 4s ease-in-out infinite;
-    }
-    .hero p { max-width: 590px; margin: 0 auto; color: #f3dfe2; font-size: 17px; line-height: 1.8; text-shadow: 0 2px 4px rgba(0,0,0,0.3); }
-    .hero-actions { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; margin-top: 32px; }
-    .disclaimer { margin-top: 24px !important; font-size: 11px !important; color: #f1c6cd !important; letter-spacing: 1px; opacity: 0.8; }
-
-    /* Infinite Scrolling Ticker */
-    .ticker { 
-      overflow: hidden; 
-      white-space: nowrap; 
-      background: linear-gradient(90deg, #f5f1f2, #e8dcdf); 
-      color: #72000e; 
-      padding: 14px 0; 
-      font-weight: 950; 
-      font-size: 11px; 
-      letter-spacing: 2.5px; 
-      box-shadow: inset 0 2px 10px rgba(0,0,0,0.1), 0 5px 25px rgba(0,0,0,0.3);
-      position: relative; 
-      z-index: 3;
-      display: flex;
-    }
-    .ticker-inner {
-      display: flex;
-      width: max-content;
-      animation: marquee 18s linear infinite;
-    }
-    .ticker-inner:hover {
-      animation-play-state: paused;
-    }
-    .ticker-content {
-      display: flex;
-      shrink: 0;
-    }
-    .ticker span { 
-      display: inline-block; 
-      padding: 0 1rem; 
-    }
-
-    @keyframes marquee {
-      0% { transform: translateX(0%); }
-      100% { transform: translateX(-50%); }
-    }
-
-    /* Sections & Cards */
-    section { padding: 96px 20px; position: relative; }
-    .container { width: min(1100px, 100%); margin: auto; }
-    .eyebrow { color: #ff7182; text-transform: uppercase; letter-spacing: 3px; font-size: 10px; font-weight: 900; display: inline-block; margin-bottom: 6px; }
-    h2 { margin: 8px 0 16px; font-size: clamp(32px, 5vw, 50px); letter-spacing: -1.5px; font-weight: 900; }
-    .section-intro { color: #bcb1b5; max-width: 620px; line-height: 1.8; font-size: 15px; }
-    
-    .features { background: linear-gradient(180deg, #060407 0%, #0d070a 100%); }
-    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 40px; }
-    
-    .card { 
-      padding: 30px; border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.08); 
-      background: linear-gradient(145deg, rgba(30, 14, 21, 0.6), rgba(16, 9, 13, 0.8)); 
-      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-      min-height: 210px; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-      position: relative; overflow: hidden;
-    }
-    .card::before {
-      content: ''; position: absolute; inset: 0; border-radius: 16px; padding: 1px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.15), transparent);
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none;
-    }
-    .card:hover { 
-      transform: translateY(-8px) scale(1.01); 
-      border-color: rgba(255, 102, 121, 0.4); 
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(164, 0, 24, 0.2);
-    }
-    .card .symbol { 
-      font-size: 26px; color: #ff6679; width: 50px; height: 50px; display: grid; place-items: center;
-      background: rgba(164, 0, 24, 0.15); border-radius: 12px; border: 1px solid rgba(255, 102, 121, 0.2);
-      margin-bottom: 20px; box-shadow: 0 4px 15px rgba(164, 0, 24, 0.2);
-    }
-    .card h3 { margin: 0 0 10px; font-size: 18px; font-weight: 800; }
-    .card p { color: #b8aab0; line-height: 1.75; font-size: 13.5px; margin: 0; }
-
-    /* Fake Panel */
-    .fake-panel { 
-      background: linear-gradient(135deg, #8f0014 0%, #54000b 50%, #290005 100%); 
-      position: relative; overflow: hidden;
-    }
-    .fake-panel::after {
-      content: ''; position: absolute; top: -50%; right: -20%; width: 500px; height: 500px;
-      background: radial-gradient(circle, rgba(255, 102, 121, 0.2) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    .panel-inner { display: grid; grid-template-columns: 1.2fr .8fr; align-items: center; gap: 45px; position: relative; z-index: 2; }
-    .panel-inner p { color: #f0d5da; line-height: 1.8; font-size: 15px; }
-    
-    .joke-box { 
-      border: 1px solid rgba(255, 255, 255, 0.25); padding: 28px; border-radius: 16px; 
-      background: rgba(30, 0, 6, 0.45); backdrop-filter: blur(16px);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-      transition: transform 0.3s ease;
-    }
-    .joke-box:hover { transform: translateY(-4px); }
-    .joke-box strong { display: block; font-size: 13px; letter-spacing: 1.5px; margin-bottom: 12px; color: #ff99a8; }
-    .joke-box p { font-size: 13px; margin: 0; line-height: 1.8; color: #fce8ec; }
-
-    /* Community Section */
-    .community { text-align: center; background: radial-gradient(circle at 50% 50%, #15080e 0%, #060407 100%); }
-    .community .section-intro { margin: 0 auto 30px; }
-
-    /* Footer */
-    footer { padding: 30px 20px; border-top: 1px solid rgba(255,255,255,0.08); color: #9f9297; font-size: 11.5px; background: #040205; }
-    .footer-inner { display: flex; justify-content: space-between; align-items: center; gap: 14px; flex-wrap: wrap; }
-
-    /* Scroll reveal animation classes */
-    .reveal {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .reveal.active {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* Responsive Design */
-    @media (max-width: 768px) {
-      .nav { gap: 14px; font-size: 11px; }
+    .hero-logo { display: block; width: min(590px, 88vw); height: auto; margin: 0 auto 22px; mix-blend-mode: normal; }
+    .hero p { max-width: 590px; margin: 0 auto; color: #f3dfe2; font-size: 16px; line-height: 1.8; }
+    .hero-actions { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-top: 27px; }
+    .btn-outline { background: #39000940; border-color: #ffffff70; }
+    .disclaimer { margin-top: 20px !important; font-size: 11px !important; color: #f1c6cd !important; }
+    .ticker { overflow: hidden; white-space: nowrap; background: #f4eeee; color: #810013; padding: 12px 0; font-weight: 950; font-size: 11px; letter-spacing: 2px; }
+    .ticker span { display: inline-block; padding-left: 100%; animation: scroll 22s linear infinite; }
+    @keyframes scroll { to { transform: translateX(-100%); } }
+    section { padding: 82px 20px; }
+    .container { width: min(1060px, 100%); margin: auto; }
+    .eyebrow { color: #ff7182; text-transform: uppercase; letter-spacing: 3px; font-size: 10px; font-weight: 900; }
+    h2 { margin: 12px 0 14px; font-size: clamp(30px, 5vw, 48px); letter-spacing: -1.8px; }
+    .section-intro { color: #bcb1b5; max-width: 620px; line-height: 1.8; }
+    .features { background: #0c080b; }
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 34px; }
+    .card { padding: 25px; border: 1px solid var(--line); background: linear-gradient(145deg, #1a0d12, #10090c); min-height: 190px; }
+    .card .symbol { font-size: 24px; color: #ff6679; }
+    .card h3 { margin: 20px 0 10px; font-size: 17px; }
+    .card p { color: #b8aab0; line-height: 1.75; font-size: 13px; margin: 0; }
+    .fake-panel { background: linear-gradient(130deg, #a50018, #4a000b); }
+    .panel-inner { display: grid; grid-template-columns: 1.2fr .8fr; align-items: center; gap: 35px; }
+    .panel-inner p { color: #f0d5da; line-height: 1.8; }
+    .joke-box { border: 1px solid #ffffff50; padding: 24px; background: #30000855; }
+    .joke-box strong { display: block; font-size: 13px; letter-spacing: 1px; margin-bottom: 8px; }
+    .joke-box p { font-size: 12px; margin: 0; }
+    .community { text-align: center; background: #0b0709; }
+    .community .section-intro { margin: 0 auto 25px; }
+    footer { padding: 24px 20px; border-top: 1px solid var(--line); color: #9f9297; font-size: 11px; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 14px; flex-wrap: wrap; }
+    @media (max-width: 720px) {
+      .nav { gap: 13px; font-size: 11px; }
       .nav .nav-cta { display: none; }
-      .hero { min-height: 550px; padding: 60px 15px; }
-      .cards, .panel-inner { grid-template-columns: 1fr; gap: 20px; }
-      section { padding: 70px 15px; }
+      .hero { min-height: 550px; }
+      .cards, .panel-inner { grid-template-columns: 1fr; }
+      section { padding: 62px 20px; }
     }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
@@ -308,14 +132,11 @@
     </section>
 
     <div class="ticker" aria-label="Mensaje decorativo">
-      <div class="ticker-track">
-        <span>MEOWWARE™ &nbsp; • &nbsp; 100% CAT POWERED &nbsp; • &nbsp; ZERO SERIOUSNESS &nbsp; • &nbsp; ONE PAW AHEAD OF THE GAME &nbsp; • &nbsp;</span>
-        <span>MEOWWARE™ &nbsp; • &nbsp; 100% CAT POWERED &nbsp; • &nbsp; ZERO SERIOUSNESS &nbsp; • &nbsp; ONE PAW AHEAD OF THE GAME &nbsp; • &nbsp;</span>
-      </div>
+      <span>MEOWWARE™ &nbsp; • &nbsp; 100% CAT POWERED &nbsp; • &nbsp; ZERO SERIOUSNESS &nbsp; • &nbsp; ONE PAW AHEAD OF THE GAME &nbsp; • &nbsp;</span>
     </div>
 
     <section class="features" id="features">
-      <div class="container reveal">
+      <div class="container">
         <span class="eyebrow">The totally real feature list</span>
         <h2>Small cat. Big claims.</h2>
         <p class="section-intro">A parody landing page with the dramatic energy of a premium gaming brand — except the only thing we're trying to dominate is your timeline.</p>
@@ -340,11 +161,11 @@
     </section>
 
     <section class="fake-panel" id="about">
-      <div class="container panel-inner reveal">
+      <div class="container panel-inner">
         <div>
           <span class="eyebrow" style="color:#ffd6dc">A very important statement</span>
           <h2>Looks serious.<br>Is absolutely not.</h2>
-          <p class="mb-6">meoware is a fan-made joke/parody concept. This website does not offer cheats, hacks, paid software, or tools that provide advantages in games. The cat is here purely for comedic purposes.</p>
+          <p>meoware is a fan-made joke/parody concept. This website does not offer cheats, hacks, paid software, or tools that provide advantages in games. The cat is here purely for comedic purposes.</p>
           <a class="btn btn-red" href="#community">I understand, meow ↗</a>
         </div>
         <aside class="joke-box">
@@ -355,7 +176,7 @@
     </section>
 
     <section class="community" id="community">
-      <div class="container reveal">
+      <div class="container">
         <span class="eyebrow">Join the joke</span>
         <h2>Welcome to the cat side.</h2>
         <p class="section-intro">Add your Discord invite below to connect this page to your community. Until then, the cat remains in charge.</p>
@@ -364,36 +185,18 @@
     </section>
   </main>
 
-    <div class="ticker" aria-label="Mensaje decorativo">
-      <div class="ticker-inner">
-        <div class="ticker-content">
-          <span>MEOWWARE™ &nbsp; • &nbsp; 100% CAT POWERED &nbsp; • &nbsp; ZERO SERIOUSNESS &nbsp; • &nbsp; ONE PAW AHEAD OF THE GAME &nbsp; • &nbsp;</span>
-          <span>MEOWWARE™ &nbsp; • &nbsp; 100% CAT POWERED &nbsp; • &nbsp; ZERO SERIOUSNESS &nbsp; • &nbsp; ONE PAW AHEAD OF THE GAME &nbsp; • &nbsp;</span>
-        </div>
-        <div class="ticker-content" aria-hidden="true">
-          <span>MEOWWARE™ &nbsp; • &nbsp; 100% CAT POWERED &nbsp; • &nbsp; ZERO SERIOUSNESS &nbsp; • &nbsp; ONE PAW AHEAD OF THE GAME &nbsp; • &nbsp;</span>
-          <span>MEOWWARE™ &nbsp; • &nbsp; 100% CAT POWERED &nbsp; • &nbsp; ZERO SERIOUSNESS &nbsp; • &nbsp; ONE PAW AHEAD OF THE GAME &nbsp; • &nbsp;</span>
-        </div>
-      </div>
+  <footer>
+    <div class="container footer-inner">
+      <span>© <span id="year"></span> meoware — Unofficial parody project.</span>
+      <span>Not affiliated with Aimware or any game developer.</span>
     </div>
+  </footer>
 
-    <section class="features" id="features">
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: "0px 0px -50px 0px"
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('active');
-        }
-      });
-    }, observerOptions);
-
-    document.querySelectorAll('.reveal').forEach(el => {
-      observer.observe(el);
-    });
+  <script>
+    // Replace this with your real Discord invite, e.g. https://discord.gg/yourcode
+    const DISCORD_INVITE = "https://discord.com/";
+    document.getElementById("discordLink").href = DISCORD_INVITE;
+    document.getElementById("year").textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
