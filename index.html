@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#a50018">
+  <meta name="description" content="meoware — One step ahead of the game. Una parodia gaming hecha por diversión.">
+  <title>meoware — One step ahead of the game</title>
+  <style>
+    :root {
+      --red: #a40018;
+      --red-dark: #72000e;
+      --red-light: #d20a27;
+      --white: #f8f6f6;
+      --muted: #c8b8bb;
+      --panel: rgba(20, 0, 4, .62);
+      --line: rgba(255,255,255,.14);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; color: var(--white);
+      background: #090609;
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+    }
+    a { color: inherit; text-decoration: none; }
+    .topbar {
+      position: sticky; top: 0; z-index: 5;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 17px clamp(18px, 5vw, 72px);
+      background: rgba(12, 0, 3, .88);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(14px);
+    }
+    .wordmark { font-weight: 950; letter-spacing: -.7px; font-size: 22px; }
+    .wordmark span { color: #ff6679; }
+    .nav { display: flex; align-items: center; gap: 26px; font-size: 13px; color: #d7cdd0; }
+    .nav a:hover { color: white; }
+    .nav-cta, .btn {
+      display: inline-flex; justify-content: center; align-items: center;
+      padding: 12px 18px; border: 1px solid rgba(255,255,255,.25);
+      border-radius: 4px; font-weight: 800; font-size: 12px;
+      text-transform: uppercase; letter-spacing: 1px; transition: .2s;
+    }
+    .nav-cta, .btn-red { background: #f5f1f2; color: #8d0015; border-color: #f5f1f2; }
+    .btn:hover, .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 28px #0007; }
+    .hero {
+      min-height: 620px; position: relative; overflow: hidden;
+      display: grid; place-items: center; text-align: center;
+      padding: 72px 20px 90px;
+      background:
+        radial-gradient(ellipse at 50% 34%, rgba(255,60,82,.22), transparent 52%),
+        linear-gradient(135deg, #a9001a 0%, #810013 55%, #4a000b 100%);
+    }
+    .hero:before {
+      content: ""; position: absolute; inset: 0; opacity: .12; pointer-events: none;
+      background-image: linear-gradient(135deg, transparent 49.5%, #fff 50%, transparent 50.5%);
+      background-size: 70px 70px;
+      mask-image: linear-gradient(to bottom, black, transparent 85%);
+    }
+    .hero-inner { position: relative; max-width: 900px; }
+    .notice {
+      display: inline-block; padding: 8px 12px; margin-bottom: 18px;
+      border: 1px solid #ffffff55; background: #40000a44;
+      font-size: 10px; letter-spacing: 2px; font-weight: 900;
+    }
+    .hero-logo { display: block; width: min(590px, 88vw); height: auto; margin: 0 auto 22px; mix-blend-mode: normal; }
+    .hero p { max-width: 590px; margin: 0 auto; color: #f3dfe2; font-size: 16px; line-height: 1.8; }
+    .hero-actions { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-top: 27px; }
+    .btn-outline { background: #39000940; border-color: #ffffff70; }
+    .disclaimer { margin-top: 20px !important; font-size: 11px !important; color: #f1c6cd !important; }
+    .ticker { overflow: hidden; white-space: nowrap; background: #f4eeee; color: #810013; padding: 12px 0; font-weight: 950; font-size: 11px; letter-spacing: 2px; }
+    .ticker span { display: inline-block; padding-left: 100%; animation: scroll 22s linear infinite; }
+    @keyframes scroll { to { transform: translateX(-100%); } }
+    section { padding: 82px 20px; }
+    .container { width: min(1060px, 100%); margin: auto; }
+    .eyebrow { color: #ff7182; text-transform: uppercase; letter-spacing: 3px; font-size: 10px; font-weight: 900; }
+    h2 { margin: 12px 0 14px; font-size: clamp(30px, 5vw, 48px); letter-spacing: -1.8px; }
+    .section-intro { color: #bcb1b5; max-width: 620px; line-height: 1.8; }
+    .features { background: #0c080b; }
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 34px; }
+    .card { padding: 25px; border: 1px solid var(--line); background: linear-gradient(145deg, #1a0d12, #10090c); min-height: 190px; }
+    .card .symbol { font-size: 24px; color: #ff6679; }
+    .card h3 { margin: 20px 0 10px; font-size: 17px; }
+    .card p { color: #b8aab0; line-height: 1.75; font-size: 13px; margin: 0; }
+    .fake-panel { background: linear-gradient(130deg, #a50018, #4a000b); }
+    .panel-inner { display: grid; grid-template-columns: 1.2fr .8fr; align-items: center; gap: 35px; }
+    .panel-inner p { color: #f0d5da; line-height: 1.8; }
+    .joke-box { border: 1px solid #ffffff50; padding: 24px; background: #30000855; }
+    .joke-box strong { display: block; font-size: 13px; letter-spacing: 1px; margin-bottom: 8px; }
+    .joke-box p { font-size: 12px; margin: 0; }
+    .community { text-align: center; background: #0b0709; }
+    .community .section-intro { margin: 0 auto 25px; }
+    footer { padding: 24px 20px; border-top: 1px solid var(--line); color: #9f9297; font-size: 11px; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 14px; flex-wrap: wrap; }
+    @media (max-width: 720px) {
+      .nav { gap: 13px; font-size: 11px; }
+      .nav .nav-cta { display: none; }
+      .hero { min-height: 550px; }
+      .cards, .panel-inner { grid-template-columns: 1fr; }
+      section { padding: 62px 20px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="wordmark" href="#home">meoware<span>®</span></a>
+    <nav class="nav" aria-label="Navegación principal">
+      <a href="#features">Features</a>
+      <a href="#about">About</a>
+      <a href="#community">Community</a>
+      <a class="nav-cta" href="#community">Enter the cat zone ↗</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-inner">
+        <div class="notice">THE INTERNET'S MOST SUSPICIOUS CAT</div>
+        <img class="hero-logo" src="meoware.png" alt="meoware — One step ahead of the game, con un gato blanco">
+        <p>A totally serious-looking gaming project. Powered by paws, questionable decisions, and an unreasonable amount of cat energy.</p>
+        <div class="hero-actions">
+          <a class="btn btn-red" href="#features">Explore the nonsense ↓</a>
+          <a class="btn btn-outline" href="#community">Join the cat club ↗</a>
+        </div>
+        <p class="disclaimer">PARODY / JOKE WEBSITE · NO SOFTWARE FOR SALE · NO GAME ADVANTAGES</p>
+      </div>
+    </section>
+
+    <div class="ticker" aria-label="Mensaje decorativo">
+      <span>MEOWWARE™ &nbsp; • &nbsp; 100% CAT POWERED &nbsp; • &nbsp; ZERO SERIOUSNESS &nbsp; • &nbsp; ONE PAW AHEAD OF THE GAME &nbsp; • &nbsp;</span>
+    </div>
+
+    <section class="features" id="features">
+      <div class="container">
+        <span class="eyebrow">The totally real feature list</span>
+        <h2>Small cat. Big claims.</h2>
+        <p class="section-intro">A parody landing page with the dramatic energy of a premium gaming brand — except the only thing we're trying to dominate is your timeline.</p>
+        <div class="cards">
+          <article class="card">
+            <div class="symbol">✦</div>
+            <h3>Advanced Cat Technology</h3>
+            <p>Our proprietary algorithm detects when someone opens a can of tuna. Results may vary by cat.</p>
+          </article>
+          <article class="card">
+            <div class="symbol">◈</div>
+            <h3>Premium Meow Experience</h3>
+            <p>High-end meows, low-resolution decisions, and absolutely no actual competitive advantage.</p>
+          </article>
+          <article class="card">
+            <div class="symbol">⌁</div>
+            <h3>Stealth Mode: Nap</h3>
+            <p>Disappear for 16 hours, then sprint through the house at 3 AM. The ultimate feline lifestyle.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="fake-panel" id="about">
+      <div class="container panel-inner">
+        <div>
+          <span class="eyebrow" style="color:#ffd6dc">A very important statement</span>
+          <h2>Looks serious.<br>Is absolutely not.</h2>
+          <p>meoware is a fan-made joke/parody concept. This website does not offer cheats, hacks, paid software, or tools that provide advantages in games. The cat is here purely for comedic purposes.</p>
+          <a class="btn btn-red" href="#community">I understand, meow ↗</a>
+        </div>
+        <aside class="joke-box">
+          <strong>✦ OFFICIAL CAT STATUS</strong>
+          <p>✓ Cute<br>✓ Dramatic red background<br>✓ Unreasonably confident<br>✗ Actually doing anything suspicious</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="community" id="community">
+      <div class="container">
+        <span class="eyebrow">Join the joke</span>
+        <h2>Welcome to the cat side.</h2>
+        <p class="section-intro">Add your Discord invite below to connect this page to your community. Until then, the cat remains in charge.</p>
+        <a class="btn btn-red" id="discordLink" href="https://discord.com/" target="_blank" rel="noopener">Open Discord ↗</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <span>© <span id="year"></span> meoware — Unofficial parody project.</span>
+      <span>Not affiliated with Aimware or any game developer.</span>
+    </div>
+  </footer>
+
+  <script>
+    // Replace this with your real Discord invite, e.g. https://discord.gg/yourcode
+    const DISCORD_INVITE = "https://discord.com/";
+    document.getElementById("discordLink").href = DISCORD_INVITE;
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
