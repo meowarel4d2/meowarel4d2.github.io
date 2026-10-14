@@ -1,104 +1,261 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#a50018">
   <meta name="description" content="meoware — One step ahead of the game. Una parodia gaming hecha por diversión.">
   <title>meoware — One step ahead of the game</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            redBrand: '#a40018',
+            redDark: '#72000e',
+            redLight: '#d20a27',
+          },
+          animation: {
+            float: 'float 4s ease-in-out infinite',
+            pulseGlow: 'pulseGlow 3s ease-in-out infinite',
+            marquee: 'marquee 22s linear infinite',
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-10px)' },
+            },
+            pulseGlow: {
+              '0%, 100%': { opacity: '0.5', transform: 'scale(1)' },
+              '50%': { opacity: '0.95', transform: 'scale(1.04)' },
+            },
+            marquee: {
+              '0%': { transform: 'translateX(0%)' },
+              '100%': { transform: 'translateX(-50%)' }
+            }
+          }
+        }
+      }
+    }
+  </script>
   <style>
     :root {
       --red: #a40018;
-      --red-dark: #72000e;
-      --red-light: #d20a27;
-      --white: #f8f6f6;
-      --muted: #c8b8bb;
-      --panel: rgba(20, 0, 4, .62);
-      --line: rgba(255,255,255,.14);
+      --red-dark: #66000e;
+      --red-deep: #420008;
+      --red-light: #e60b2b;
+      --white: #ffffff;
+      --muted: #f4dcd0;
+      --line: rgba(255, 255, 255, 0.22);
     }
+    
     * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+    
     body {
-      margin: 0; color: var(--white);
-      background: #090609;
+      margin: 0; 
+      color: var(--white);
+      background: #50000a;
       font-family: Inter, "Segoe UI", Arial, sans-serif;
+      overflow-x: hidden;
     }
+    
     a { color: inherit; text-decoration: none; }
+
     .topbar {
-      position: sticky; top: 0; z-index: 5;
+      position: sticky; top: 0; z-index: 50;
       display: flex; justify-content: space-between; align-items: center;
-      padding: 17px clamp(18px, 5vw, 72px);
-      background: rgba(12, 0, 3, .88);
+      padding: 18px clamp(18px, 5vw, 72px);
+      background: rgba(85, 0, 12, 0.88);
       border-bottom: 1px solid var(--line);
-      backdrop-filter: blur(14px);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
     }
-    .wordmark { font-weight: 950; letter-spacing: -.7px; font-size: 22px; }
-    .wordmark span { color: #ff6679; }
-    .nav { display: flex; align-items: center; gap: 26px; font-size: 13px; color: #d7cdd0; }
+    .wordmark { font-weight: 950; letter-spacing: -.7px; font-size: 22px; transition: transform 0.2s; }
+    .wordmark:hover { transform: scale(1.03); }
+    .wordmark span { color: #ff8896; text-shadow: 0 0 10px rgba(255, 136, 150, 0.6); }
+    
+    .nav { display: flex; align-items: center; gap: 26px; font-size: 13px; color: #f7d6dc; }
+    .nav a { position: relative; transition: color 0.2s; font-weight: 600; }
+    .nav a:not(.nav-cta):after {
+      content: ''; position: absolute; width: 0; height: 2px; bottom: -4px; left: 0;
+      background: #ff8896; transition: width 0.3s ease;
+    }
+    .nav a:not(.nav-cta):hover:after { width: 100%; }
     .nav a:hover { color: white; }
+
     .nav-cta, .btn {
       display: inline-flex; justify-content: center; align-items: center;
-      padding: 12px 18px; border: 1px solid rgba(255,255,255,.25);
-      border-radius: 4px; font-weight: 800; font-size: 12px;
-      text-transform: uppercase; letter-spacing: 1px; transition: .2s;
+      padding: 12px 22px; border: 1px solid rgba(255,255,255,.4);
+      border-radius: 6px; font-weight: 800; font-size: 12px;
+      text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s ease;
+      position: relative; overflow: hidden;
+      cursor: pointer;
     }
-    .nav-cta, .btn-red { background: #f5f1f2; color: #8d0015; border-color: #f5f1f2; }
-    .btn:hover, .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 28px #0007; }
+    
+    .nav-cta, .btn-red { 
+      background: #f8f6f6; 
+      color: #72000e; 
+      border-color: #ffffff;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25);
+    }
+    .btn:hover, .nav-cta:hover { 
+      transform: translateY(-3px); 
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4); 
+    }
+    .btn-outline { 
+      background: rgba(80, 0, 10, 0.4); 
+      border-color: rgba(255, 255, 255, 0.5); 
+      backdrop-filter: blur(8px);
+    }
+    .btn-outline:hover {
+      background: rgba(255, 255, 255, 0.2);
+      border-color: #ffffff;
+    }
+
     .hero {
       min-height: 620px; position: relative; overflow: hidden;
       display: grid; place-items: center; text-align: center;
       padding: 72px 20px 90px;
       background:
-        radial-gradient(ellipse at 50% 34%, rgba(255,60,82,.22), transparent 52%),
-        linear-gradient(135deg, #a9001a 0%, #810013 55%, #4a000b 100%);
+        radial-gradient(ellipse at 50% 34%, rgba(255, 100, 120, 0.35), transparent 60%),
+        linear-gradient(135deg, #ad001a 0%, #7d0013 55%, #4c000b 100%);
     }
-    .hero:before {
+    .hero::before {
       content: ""; position: absolute; inset: 0; opacity: .12; pointer-events: none;
       background-image: linear-gradient(135deg, transparent 49.5%, #fff 50%, transparent 50.5%);
       background-size: 70px 70px;
       mask-image: linear-gradient(to bottom, black, transparent 85%);
     }
-    .hero-inner { position: relative; max-width: 900px; }
+    .hero-inner { position: relative; max-width: 900px; z-index: 2; }
+    
     .notice {
-      display: inline-block; padding: 8px 12px; margin-bottom: 18px;
-      border: 1px solid #ffffff55; background: #40000a44;
+      display: inline-block; padding: 8px 16px; margin-bottom: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.4); background: rgba(80, 0, 10, 0.45);
       font-size: 10px; letter-spacing: 2px; font-weight: 900;
+      backdrop-filter: blur(8px); box-shadow: 0 0 20px rgba(164, 0, 24, 0.3);
+      border-radius: 4px;
     }
-    .hero-logo { display: block; width: min(590px, 88vw); height: auto; margin: 0 auto 22px; mix-blend-mode: normal; }
-    .hero p { max-width: 590px; margin: 0 auto; color: #f3dfe2; font-size: 16px; line-height: 1.8; }
-    .hero-actions { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-top: 27px; }
-    .btn-outline { background: #39000940; border-color: #ffffff70; }
-    .disclaimer { margin-top: 20px !important; font-size: 11px !important; color: #f1c6cd !important; }
-    .ticker { overflow: hidden; white-space: nowrap; background: #f4eeee; color: #810013; padding: 12px 0; font-weight: 950; font-size: 11px; letter-spacing: 2px; }
-    .ticker span { display: inline-block; padding-left: 100%; animation: scroll 22s linear infinite; }
-    @keyframes scroll { to { transform: translateX(-100%); } }
-    section { padding: 82px 20px; }
+    
+    .hero-logo { 
+      display: block; width: min(580px, 88vw); height: auto; margin: 0 auto 22px; 
+      filter: drop-shadow(0 12px 28px rgba(0, 0, 0, 0.4));
+      animation: float 4s ease-in-out infinite;
+    }
+    .hero p { max-width: 590px; margin: 0 auto; color: #fce8ec; font-size: 16px; line-height: 1.8; text-shadow: 0 1px 3px rgba(0,0,0,0.3); }
+    .hero-actions { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; margin-top: 28px; }
+    .disclaimer { margin-top: 20px !important; font-size: 11px !important; color: #ffd1d8 !important; letter-spacing: 1px; }
+
+    .ticker { 
+      overflow: hidden; 
+      white-space: nowrap; 
+      background: #f8f6f6; 
+      color: #810013; 
+      padding: 13px 0; 
+      font-weight: 950; 
+      font-size: 11px; 
+      letter-spacing: 2.2px; 
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      position: relative; 
+      z-index: 10;
+      display: flex;
+      width: 100%;
+    }
+    .ticker-inner {
+      display: flex;
+      width: max-content;
+      animation: marquee 22s linear infinite;
+    }
+    .ticker-inner:hover {
+      animation-play-state: paused;
+    }
+    .ticker-content {
+      display: flex;
+      flex-shrink: 0;
+    }
+    .ticker span { 
+      display: inline-block; 
+      padding: 0 1.5rem; 
+    }
+
+    section { padding: 85px 20px; position: relative; }
     .container { width: min(1060px, 100%); margin: auto; }
-    .eyebrow { color: #ff7182; text-transform: uppercase; letter-spacing: 3px; font-size: 10px; font-weight: 900; }
-    h2 { margin: 12px 0 14px; font-size: clamp(30px, 5vw, 48px); letter-spacing: -1.8px; }
-    .section-intro { color: #bcb1b5; max-width: 620px; line-height: 1.8; }
-    .features { background: #0c080b; }
-    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 34px; }
-    .card { padding: 25px; border: 1px solid var(--line); background: linear-gradient(145deg, #1a0d12, #10090c); min-height: 190px; }
-    .card .symbol { font-size: 24px; color: #ff6679; }
-    .card h3 { margin: 20px 0 10px; font-size: 17px; }
-    .card p { color: #b8aab0; line-height: 1.75; font-size: 13px; margin: 0; }
-    .fake-panel { background: linear-gradient(130deg, #a50018, #4a000b); }
-    .panel-inner { display: grid; grid-template-columns: 1.2fr .8fr; align-items: center; gap: 35px; }
-    .panel-inner p { color: #f0d5da; line-height: 1.8; }
-    .joke-box { border: 1px solid #ffffff50; padding: 24px; background: #30000855; }
-    .joke-box strong { display: block; font-size: 13px; letter-spacing: 1px; margin-bottom: 8px; }
-    .joke-box p { font-size: 12px; margin: 0; }
-    .community { text-align: center; background: #0b0709; }
-    .community .section-intro { margin: 0 auto 25px; }
-    footer { padding: 24px 20px; border-top: 1px solid var(--line); color: #9f9297; font-size: 11px; }
-    .footer-inner { display: flex; justify-content: space-between; gap: 14px; flex-wrap: wrap; }
-    @media (max-width: 720px) {
-      .nav { gap: 13px; font-size: 11px; }
+    .eyebrow { color: #ffa2ad; text-transform: uppercase; letter-spacing: 3px; font-size: 10px; font-weight: 900; display: inline-block; margin-bottom: 6px; }
+    h2 { margin: 8px 0 16px; font-size: clamp(30px, 5vw, 48px); letter-spacing: -1.5px; font-weight: 900; }
+    .section-intro { color: #f1d3d8; max-width: 620px; line-height: 1.8; font-size: 15px; }
+    
+    .features { 
+      background: linear-gradient(180deg, #66000e 0%, #4a000a 100%); 
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 36px; }
+    
+    .card { 
+      padding: 28px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.18); 
+      background: linear-gradient(145deg, rgba(120, 0, 18, 0.7), rgba(70, 0, 10, 0.85)); 
+      backdrop-filter: blur(10px);
+      min-height: 200px; transition: all 0.35s ease;
+      position: relative;
+    }
+    .card:hover { 
+      transform: translateY(-6px); 
+      border-color: rgba(255, 170, 180, 0.5); 
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.35);
+    }
+    .card .symbol { 
+      font-size: 24px; color: #ff8896; margin-bottom: 16px;
+    }
+    .card h3 { margin: 0 0 10px; font-size: 18px; font-weight: 800; }
+    .card p { color: #f3d2d7; line-height: 1.75; font-size: 13px; margin: 0; }
+
+    .fake-panel { 
+      background: linear-gradient(135deg, #a50018 0%, #68000f 60%, #3e0009 100%); 
+      border-top: 1px solid rgba(255,255,255,0.15);
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+    }
+    .panel-inner { display: grid; grid-template-columns: 1.2fr .8fr; align-items: center; gap: 40px; position: relative; z-index: 2; }
+    .panel-inner p { color: #f0d5da; line-height: 1.8; font-size: 15px; }
+    
+    .joke-box { 
+      border: 1px solid rgba(255, 255, 255, 0.35); padding: 26px; border-radius: 8px; 
+      background: rgba(60, 0, 9, 0.55); backdrop-filter: blur(12px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+    }
+    .joke-box strong { display: block; font-size: 13px; letter-spacing: 1.5px; margin-bottom: 10px; color: #ffa2ad; }
+    .joke-box p { font-size: 13px; margin: 0; line-height: 1.8; color: #fce8ec; }
+
+    .community { 
+      text-align: center; 
+      background: linear-gradient(180deg, #4a000a 0%, #330006 100%); 
+    }
+    .community .section-intro { margin: 0 auto 28px; }
+
+    footer { 
+      padding: 26px 20px; 
+      border-top: 1px solid rgba(255, 255, 255, 0.15); 
+      color: #e2bdc3; 
+      font-size: 11px; 
+      background: #250004; 
+    }
+    .footer-inner { display: flex; justify-content: space-between; align-items: center; gap: 14px; flex-wrap: wrap; }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(25px);
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 768px) {
+      .nav { gap: 14px; font-size: 11px; }
       .nav .nav-cta { display: none; }
-      .hero { min-height: 550px; }
-      .cards, .panel-inner { grid-template-columns: 1fr; }
-      section { padding: 62px 20px; }
+      .hero { min-height: 540px; padding: 60px 15px; }
+      .cards, .panel-inner { grid-template-columns: 1fr; gap: 18px; }
+      section { padding: 65px 15px; }
     }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
@@ -121,7 +278,7 @@
     <section class="hero" id="home">
       <div class="hero-inner">
         <div class="notice">THE INTERNET'S MOST SUSPICIOUS CAT</div>
-        <img class="hero-logo" src="meoware.png" alt="meoware — One step ahead of the game, con un gato blanco">
+        <img class="hero-logo" src="meoware.png" alt="meoware — One step ahead of the game, con un gato blanco" onerror="this.onerror=null; this.src='meoware.jpg';">
         <p>A totally serious-looking gaming project. Powered by paws, questionable decisions, and an unreasonable amount of cat energy.</p>
         <div class="hero-actions">
           <a class="btn btn-red" href="#features">Explore the nonsense ↓</a>
@@ -132,11 +289,20 @@
     </section>
 
     <div class="ticker" aria-label="Mensaje decorativo">
-      <span>MEOWWARE™ &nbsp; • &nbsp; 100% CAT POWERED &nbsp; • &nbsp; ZERO SERIOUSNESS &nbsp; • &nbsp; ONE PAW AHEAD OF THE GAME &nbsp; • &nbsp;</span>
+      <div class="ticker-inner">
+        <div class="ticker-content">
+          <span>MEOWWARE™ &nbsp; • &nbsp; 100% CAT POWERED &nbsp; • &nbsp; ZERO SERIOUSNESS &nbsp; • &nbsp; ONE PAW AHEAD OF THE GAME &nbsp; • &nbsp;</span>
+          <span>MEOWWARE™ &nbsp; • &nbsp; 100% CAT POWERED &nbsp; • &nbsp; ZERO SERIOUSNESS &nbsp; • &nbsp; ONE PAW AHEAD OF THE GAME &nbsp; • &nbsp;</span>
+        </div>
+        <div class="ticker-content" aria-hidden="true">
+          <span>MEOWWARE™ &nbsp; • &nbsp; 100% CAT POWERED &nbsp; • &nbsp; ZERO SERIOUSNESS &nbsp; • &nbsp; ONE PAW AHEAD OF THE GAME &nbsp; • &nbsp;</span>
+          <span>MEOWWARE™ &nbsp; • &nbsp; 100% CAT POWERED &nbsp; • &nbsp; ZERO SERIOUSNESS &nbsp; • &nbsp; ONE PAW AHEAD OF THE GAME &nbsp; • &nbsp;</span>
+        </div>
+      </div>
     </div>
 
     <section class="features" id="features">
-      <div class="container">
+      <div class="container reveal">
         <span class="eyebrow">The totally real feature list</span>
         <h2>Small cat. Big claims.</h2>
         <p class="section-intro">A parody landing page with the dramatic energy of a premium gaming brand — except the only thing we're trying to dominate is your timeline.</p>
@@ -161,11 +327,11 @@
     </section>
 
     <section class="fake-panel" id="about">
-      <div class="container panel-inner">
+      <div class="container panel-inner reveal">
         <div>
           <span class="eyebrow" style="color:#ffd6dc">A very important statement</span>
           <h2>Looks serious.<br>Is absolutely not.</h2>
-          <p>meoware is a fan-made joke/parody concept. This website does not offer cheats, hacks, paid software, or tools that provide advantages in games. The cat is here purely for comedic purposes.</p>
+          <p class="mb-6">meoware is a fan-made joke/parody concept. This website does not offer cheats, hacks, paid software, or tools that provide advantages in games. The cat is here purely for comedic purposes.</p>
           <a class="btn btn-red" href="#community">I understand, meow ↗</a>
         </div>
         <aside class="joke-box">
@@ -176,7 +342,7 @@
     </section>
 
     <section class="community" id="community">
-      <div class="container">
+      <div class="container reveal">
         <span class="eyebrow">Join the joke</span>
         <h2>Welcome to the cat side.</h2>
         <p class="section-intro">Add your Discord invite below to connect this page to your community. Until then, the cat remains in charge.</p>
@@ -193,10 +359,28 @@
   </footer>
 
   <script>
-    // Replace this with your real Discord invite, e.g. https://discord.gg/yourcode
+    // Discord link and Year setup
     const DISCORD_INVITE = "https://discord.com/";
     document.getElementById("discordLink").href = DISCORD_INVITE;
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Intersection observer for scroll animation
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: "0px 0px -40px 0px"
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal').forEach(el => {
+      observer.observe(el);
+    });
   </script>
 </body>
 </html>
