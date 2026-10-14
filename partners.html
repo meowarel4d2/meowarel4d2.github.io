@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#a50018">
+  <meta name="description" content="meoware — Left 4 Dead 2 Official Partners and Content Creators.">
+  <title>meoware.l4d2 — Partners & Creators</title>
+  <style>
+    :root {
+      --red: #ff1e38;
+      --red-dark: #b3001b;
+      --red-glow: rgba(255, 30, 56, 0.4);
+      --bg: #070405;
+      --panel: rgba(18, 8, 11, 0.75);
+      --border: rgba(255, 30, 56, 0.25);
+      --white: #fcf6f7;
+      --muted: #b09ea3;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; color: var(--white);
+      background: var(--bg);
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* Navbar */
+    .topbar {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 16px clamp(20px, 5vw, 60px);
+      background: rgba(7, 4, 5, 0.85);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(16px);
+    }
+    .wordmark { font-weight: 950; letter-spacing: -0.5px; font-size: 22px; display: flex; align-items: center; gap: 6px; }
+    .wordmark span { color: var(--red); text-shadow: 0 0 12px var(--red-glow); }
+    .nav { display: flex; align-items: center; gap: 24px; font-size: 13px; font-weight: 600; color: var(--muted); }
+    .nav a:hover { color: var(--white); text-shadow: 0 0 8px rgba(255,255,255,0.5); }
+
+    .btn {
+      display: inline-flex; justify-content: center; align-items: center;
+      padding: 10px 20px; border-radius: 6px; font-weight: 800; font-size: 12px;
+      text-transform: uppercase; letter-spacing: 1.2px; transition: all 0.25s ease;
+      cursor: pointer;
+    }
+    .btn-red {
+      background: linear-gradient(135deg, var(--red), var(--red-dark));
+      color: white; border: 1px solid rgba(255,255,255,0.2);
+      box-shadow: 0 4px 20px var(--red-glow);
+    }
+    .btn-red:hover { transform: translateY(-2px); box-shadow: 0 6px 28px rgba(255, 30, 56, 0.7); }
+    .btn-outline {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: var(--white);
+    }
+    .btn-outline:hover { background: rgba(255,255,255,0.08); border-color: var(--red); }
+
+    /* Header Section */
+    .header-section {
+      text-align: center; padding: 70px 20px 40px;
+      background: radial-gradient(circle at 50% 10%, rgba(255, 30, 56, 0.15), transparent 70%);
+    }
+    .eyebrow { color: var(--red); text-transform: uppercase; letter-spacing: 3px; font-size: 11px; font-weight: 900; display: block; margin-bottom: 8px; }
+    h1 { margin: 0 0 12px; font-size: clamp(32px, 5vw, 48px); letter-spacing: -1px; }
+    .header-section p { max-width: 550px; margin: 0 auto; color: var(--muted); font-size: 15px; line-height: 1.7; }
+
+    /* Partners Grid */
+    .partners-container { max-width: 1100px; margin: 0 auto; padding: 40px 20px 90px; }
+    .partners-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 25px;
+    }
+    .partner-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 12px; padding: 30px;
+      display: flex; flex-direction: column; gap: 20px;
+      transition: transform .3s ease, border-color .3s ease;
+      position: relative; overflow: hidden;
+    }
+    .partner-card:hover { transform: translateY(-5px); border-color: var(--red); }
+    
+    .partner-header { display: flex; align-items: center; gap: 16px; }
+    
+    /* Profile Picture Container */
+    .partner-avatar {
+      width: 65px; height: 65px; border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--red);
+      background: #1a080c;
+      box-shadow: 0 0 15px var(--red-glow);
+    }
+
+    .partner-info h3 { margin: 0 0 4px; font-size: 18px; }
+    .partner-role { font-size: 11px; color: var(--red); font-weight: 800; letter-spacing: 1px; text-transform: uppercase; }
+    .partner-bio { color: var(--muted); font-size: 13px; line-height: 1.6; margin: 0; }
+    
+    /* Social Links */
+    .social-links { display: flex; gap: 10px; flex-wrap: wrap; margin-top: auto; }
+    .social-btn {
+      flex: 1; padding: 10px; border-radius: 6px; font-size: 12px; font-weight: 700;
+      text-align: center; border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.03); transition: 0.2s;
+    }
+    .social-btn:hover { background: rgba(255,255,255,0.08); border-color: var(--red); }
+    .social-btn.youtube:hover { border-color: #ff0000; color: #ff6666; }
+    .social-btn.discord:hover { border-color: #5865F2; color: #7983f5; }
+    .social-btn.twitch:hover { border-color: #9146FF; color: #b178ff; }
+
+    /* Footer */
+    footer { padding: 30px 20px; border-top: 1px solid rgba(255,255,255,0.08); color: var(--muted); font-size: 12px; text-align: center; }
+  </style>
+</head>
+<body>
+
+  <header class="topbar">
+    <a class="wordmark" href="index.html">meoware<span>.l4d2</span></a>
+    <nav class="nav" aria-label="Navegación principal">
+      <a href="index.html">Home</a>
+      <a href="index.html#pricing">Pricing</a>
+      <a href="partners.html" style="color: var(--white);">Partners</a>
+      <a class="btn btn-outline" href="index.html" style="padding: 6px 14px; font-size: 11px;">← Back Home</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="header-section">
+      <span class="eyebrow">Verified L4D2 Survivors</span>
+      <h1>Elite Partners & Streamers</h1>
+      <p>Meet our official content creators and community testers who dominate Versus mode and test the limits of the Director.</p>
+    </section>
+
+    <div class="partners-container">
+      <div class="partners-grid">
+        
+        <!-- Partner Card 1 -->
+        <article class="partner-card">
+          <div class="partner-header">
+            <!-- Cambia 'avatar1.jpg' por el enlace o archivo de la foto de perfil -->
+            <img class="partner-avatar" src="avatar1.jpg" alt="Avatar Partner 1" onerror="this.src='https://via.placeholder.com/65/200408/ff1e38?text=🐾'">
+            <div class="partner-info">
+              <h3>siltflow</h3>
+              <div class="partner-role">Versus Main / Aim god</div>
+            </div>
+          </div>
+          <p class="partner-bio">Expert in shotgun crowning Witches and 1 taping hunters.</p>
+          <div class="social-links">
+            <a class="social-btn youtube" href="https://www.youtube.com/@slitflow" target="_blank" rel="noopener">YouTube ↗</a>
+            <a class="social-btn steam" href="https://steamcommunity.com/id/siltflow/" target="_blank" rel="noopener">Steam ↗</a>
+          </div>
+        </article>
+
+        <!-- Partner Card 2 -->
+        <article class="partner-card">
+          <div class="partner-header">
+            <!-- Cambia 'avatar2.jpg' por la foto de perfil -->
+            <img class="partner-avatar" src="avatar2.jpg" alt="Avatar Partner 2" onerror="this.src='https://via.placeholder.com/65/200408/ff1e38?text=🎮'">
+            <div class="partner-info">
+              <h3>Jeanne</h3>
+              <div class="partner-role">Bhopper - Skeet expert</div>
+            </div>
+          </div>
+          <p class="partner-bio">Never misses a hunter skeet in mid-air and always land the bhops.</p>
+          <div class="social-links">
+            <a class="social-btn youtube" href="https://www.youtube.com/@catalolzank" target="_blank" rel="noopener">YouTube ↗</a>
+            <a class="social-btn steam" href="https://steamcommunity.com/id/stupidbutterfly" target="_blank" rel="noopener">Steam ↗</a>
+          </div>
+        </article>
+
+        <!-- Partner Card 3 -->
+        <article class="partner-card">
+          <div class="partner-header">
+            <!-- Cambia 'avatar3.jpg' por la foto de perfil -->
+            <img class="partner-avatar" src="avatar3.jpg" alt="Avatar Partner 3" onerror="this.src='https://via.placeholder.com/65/200408/ff1e38?text=⚡'">
+            <div class="partner-info">
+              <h3>Bhella Killah</h3>
+              <div class="partner-role">Speedrunner & Bhop God</div>
+            </div>
+          </div>
+          <p class="partner-bio">Specialized in bhoping and tank haymakers</p>
+          <div class="social-links">
+            <a class="social-btn youtube" href="https://www.youtube.com/@BhellaKillaaa" target="_blank" rel="noopener">Youtube ↗</a>
+            <a class="social-btn steam" href="https://steamcommunity.com/id/Fluttershyl4d2" target="_blank" rel="noopener">Steam ↗</a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div style="max-width: 1100px; margin: auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+      <span>© <span id="year"></span> meoware.l4d2. Unofficial parody project.</span>
+      <a href="index.html" class="btn btn-outline" style="padding: 6px 14px; font-size: 11px;">Return to Main Page</a>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

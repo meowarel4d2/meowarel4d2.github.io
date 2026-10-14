@@ -1,386 +1,387 @@
 <!DOCTYPE html>
-<html lang="es" class="scroll-smooth">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#a50018">
-  <meta name="description" content="meoware — One step ahead of the game.">
-  <title>meoware — One step ahead of the game</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            redBrand: '#a40018',
-            redDark: '#72000e',
-            redLight: '#d20a27',
-          },
-          animation: {
-            float: 'float 4s ease-in-out infinite',
-            pulseGlow: 'pulseGlow 3s ease-in-out infinite',
-            marquee: 'marquee 22s linear infinite',
-          },
-          keyframes: {
-            float: {
-              '0%, 100%': { transform: 'translateY(0px)' },
-              '50%': { transform: 'translateY(-10px)' },
-            },
-            pulseGlow: {
-              '0%, 100%': { opacity: '0.5', transform: 'scale(1)' },
-              '50%': { opacity: '0.95', transform: 'scale(1.04)' },
-            },
-            marquee: {
-              '0%': { transform: 'translateX(0%)' },
-              '100%': { transform: 'translateX(-50%)' }
-            }
-          }
-        }
-      }
-    }
-  </script>
+  <meta name="description" content="meoware — Left 4 Dead 2 Premium Software.">
+  <title>meoware — L4D2 Elite Edition</title>
   <style>
     :root {
-      --red: #a40018;
-      --red-dark: #66000e;
-      --red-deep: #420008;
-      --red-light: #e60b2b;
-      --white: #ffffff;
-      --muted: #f4dcd0;
-      --line: rgba(255, 255, 255, 0.22);
+      --red: #ff1e38;
+      --red-dark: #b3001b;
+      --red-glow: rgba(255, 30, 56, 0.4);
+      --bg: #070405;
+      --panel: rgba(18, 8, 11, 0.75);
+      --border: rgba(255, 30, 56, 0.25);
+      --white: #fcf6f7;
+      --muted: #b09ea3;
     }
-    
+
     * { box-sizing: border-box; }
-    
+    html { scroll-behavior: smooth; }
     body {
-      margin: 0; 
-      color: var(--white);
-      background: #50000a;
-      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      margin: 0; color: var(--white);
+      background: var(--bg);
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
       overflow-x: hidden;
     }
-    
     a { color: inherit; text-decoration: none; }
 
+    /* Top Status Bar */
+    .status-bar {
+      background: #0d0204;
+      border-bottom: 1px solid var(--border);
+      padding: 8px 20px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+      color: var(--muted);
+    }
+    .status-bar .live { color: #00ff66; text-shadow: 0 0 8px rgba(0,255,102,0.6); }
+
+    /* Navbar */
     .topbar {
-      position: sticky; top: 0; z-index: 50;
+      position: sticky; top: 0; z-index: 100;
       display: flex; justify-content: space-between; align-items: center;
-      padding: 18px clamp(18px, 5vw, 72px);
-      background: rgba(85, 0, 12, 0.88);
-      border-bottom: 1px solid var(--line);
+      padding: 16px clamp(20px, 5vw, 60px);
+      background: rgba(7, 4, 5, 0.85);
+      border-bottom: 1px solid var(--border);
       backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
     }
-    .wordmark { font-weight: 950; letter-spacing: -.7px; font-size: 22px; transition: transform 0.2s; }
-    .wordmark:hover { transform: scale(1.03); }
-    .wordmark span { color: #ff8896; text-shadow: 0 0 10px rgba(255, 136, 150, 0.6); }
+    .wordmark { font-weight: 950; letter-spacing: -0.5px; font-size: 22px; display: flex; align-items: center; gap: 6px; }
+    .wordmark span { color: var(--red); text-shadow: 0 0 12px var(--red-glow); }
+    .nav { display: flex; align-items: center; gap: 24px; font-size: 13px; font-weight: 600; color: var(--muted); }
+    .nav a:hover { color: var(--white); text-shadow: 0 0 8px rgba(255,255,255,0.5); }
     
-    .nav { display: flex; align-items: center; gap: 26px; font-size: 13px; color: #f7d6dc; }
-    .nav a { position: relative; transition: color 0.2s; font-weight: 600; }
-    .nav a:not(.nav-cta):after {
-      content: ''; position: absolute; width: 0; height: 2px; bottom: -4px; left: 0;
-      background: #ff8896; transition: width 0.3s ease;
-    }
-    .nav a:not(.nav-cta):hover:after { width: 100%; }
-    .nav a:hover { color: white; }
-
-    .nav-cta, .btn {
+    .btn {
       display: inline-flex; justify-content: center; align-items: center;
-      padding: 12px 22px; border: 1px solid rgba(255,255,255,.4);
-      border-radius: 6px; font-weight: 800; font-size: 12px;
-      text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s ease;
-      position: relative; overflow: hidden;
-      cursor: pointer;
+      padding: 10px 20px; border-radius: 6px; font-weight: 800; font-size: 12px;
+      text-transform: uppercase; letter-spacing: 1.2px; transition: all 0.25s ease;
+      cursor: pointer; position: relative; overflow: hidden;
     }
-    
-    .nav-cta, .btn-red { 
-      background: #f8f6f6; 
-      color: #72000e; 
-      border-color: #ffffff;
-      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25);
+    .btn-red {
+      background: linear-gradient(135deg, var(--red), var(--red-dark));
+      color: white; border: 1px solid rgba(255,255,255,0.2);
+      box-shadow: 0 4px 20px var(--red-glow);
     }
-    .btn:hover, .nav-cta:hover { 
-      transform: translateY(-3px); 
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4); 
+    .btn-red:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 28px rgba(255, 30, 56, 0.7);
     }
-    .btn-outline { 
-      background: rgba(80, 0, 10, 0.4); 
-      border-color: rgba(255, 255, 255, 0.5); 
-      backdrop-filter: blur(8px);
+    .btn-outline {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: var(--white);
     }
-    .btn-outline:hover {
-      background: rgba(255, 255, 255, 0.2);
-      border-color: #ffffff;
-    }
+    .btn-outline:hover { background: rgba(255,255,255,0.08); border-color: var(--red); }
 
+    /* Hero Section */
     .hero {
-      min-height: 620px; position: relative; overflow: hidden;
+      min-height: 85vh; position: relative;
       display: grid; place-items: center; text-align: center;
-      padding: 72px 20px 90px;
-      background:
-        radial-gradient(ellipse at 50% 34%, rgba(255, 100, 120, 0.35), transparent 60%),
-        linear-gradient(135deg, #ad001a 0%, #7d0013 55%, #4c000b 100%);
-    }
-    .hero::before {
-      content: ""; position: absolute; inset: 0; opacity: .12; pointer-events: none;
-      background-image: linear-gradient(135deg, transparent 49.5%, #fff 50%, transparent 50.5%);
-      background-size: 70px 70px;
-      mask-image: linear-gradient(to bottom, black, transparent 85%);
+      padding: 80px 20px;
+      background: 
+        radial-gradient(circle at 50% 25%, rgba(255, 30, 56, 0.18), transparent 60%),
+        linear-gradient(180deg, #070405 0%, #120306 100%);
     }
     .hero-inner { position: relative; max-width: 900px; z-index: 2; }
     
-    .notice {
-      display: inline-block; padding: 8px 16px; margin-bottom: 20px;
-      border: 1px solid rgba(255, 255, 255, 0.4); background: rgba(80, 0, 10, 0.45);
-      font-size: 10px; letter-spacing: 2px; font-weight: 900;
-      backdrop-filter: blur(8px); box-shadow: 0 0 20px rgba(164, 0, 24, 0.3);
-      border-radius: 4px;
+    .badge-pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 14px; margin-bottom: 22px;
+      background: rgba(255, 30, 56, 0.1);
+      border: 1px solid var(--border);
+      border-radius: 50px; font-size: 11px; font-weight: 800;
+      letter-spacing: 1.5px; color: #ff8593;
+      animation: pulse-badge 2s infinite;
     }
-    
-    .hero-logo { 
-      display: block; width: min(580px, 88vw); height: auto; margin: 0 auto 22px; 
-      filter: drop-shadow(0 12px 28px rgba(0, 0, 0, 0.4));
+    @keyframes pulse-badge {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(255, 30, 56, 0.4); }
+      50% { box-shadow: 0 0 0 10px rgba(255, 30, 56, 0); }
+    }
+
+    .hero-logo {
+      display: block; width: min(320px, 75vw); height: auto; margin: 0 auto 24px;
+      filter: drop-shadow(0 0 30px rgba(255, 30, 56, 0.3));
       animation: float 4s ease-in-out infinite;
     }
-    .hero p { max-width: 590px; margin: 0 auto; color: #fce8ec; font-size: 16px; line-height: 1.8; text-shadow: 0 1px 3px rgba(0,0,0,0.3); }
-    .hero-actions { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; margin-top: 28px; }
-    .disclaimer { margin-top: 20px !important; font-size: 11px !important; color: #ffd1d8 !important; letter-spacing: 1px; }
-
-    .ticker { 
-      overflow: hidden; 
-      white-space: nowrap; 
-      background: #f8f6f6; 
-      color: #810013; 
-      padding: 13px 0; 
-      font-weight: 950; 
-      font-size: 11px; 
-      letter-spacing: 2.2px; 
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-      position: relative; 
-      z-index: 10;
-      display: flex;
-      width: 100%;
-    }
-    .ticker-inner {
-      display: flex;
-      width: max-content;
-      animation: marquee 22s linear infinite;
-    }
-    .ticker-inner:hover {
-      animation-play-state: paused;
-    }
-    .ticker-content {
-      display: flex;
-      flex-shrink: 0;
-    }
-    .ticker span { 
-      display: inline-block; 
-      padding: 0 1.5rem; 
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
     }
 
-    section { padding: 85px 20px; position: relative; }
-    .container { width: min(1060px, 100%); margin: auto; }
-    .eyebrow { color: #ffa2ad; text-transform: uppercase; letter-spacing: 3px; font-size: 10px; font-weight: 900; display: inline-block; margin-bottom: 6px; }
-    h2 { margin: 8px 0 16px; font-size: clamp(30px, 5vw, 48px); letter-spacing: -1.5px; font-weight: 900; }
-    .section-intro { color: #f1d3d8; max-width: 620px; line-height: 1.8; font-size: 15px; }
+    .hero p { max-width: 600px; margin: 0 auto 30px; color: var(--muted); font-size: 16px; line-height: 1.7; }
+    .hero-actions { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
+
+    /* Ticker */
+    .ticker {
+      overflow: hidden; white-space: nowrap; background: #120305;
+      color: var(--red); padding: 14px 0; font-weight: 900; font-size: 11px;
+      letter-spacing: 3px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+    }
+    .ticker span { display: inline-block; padding-left: 100%; animation: scroll 25s linear infinite; }
+    @keyframes scroll { to { transform: translateX(-100%); } }
+
+    /* Sections */
+    section { padding: 90px 20px; }
+    .container { width: min(1100px, 100%); margin: auto; }
+    .section-header { text-align: center; margin-bottom: 60px; }
+    .eyebrow { color: var(--red); text-transform: uppercase; letter-spacing: 3px; font-size: 11px; font-weight: 900; display: block; margin-bottom: 8px; }
+    h2 { margin: 0; font-size: clamp(28px, 4vw, 42px); letter-spacing: -1px; }
+
+    /* Pricing / Products Grid */
+    .pricing-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+      gap: 24px; align-items: stretch;
+    }
+    .price-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 12px; padding: 35px 30px;
+      display: flex; flex-direction: column;
+      position: relative; transition: transform .3s, border-color .3s;
+    }
+    .price-card.featured {
+      background: linear-gradient(180deg, rgba(35, 10, 16, 0.9), rgba(18, 8, 11, 0.95));
+      border-color: var(--red);
+      box-shadow: 0 10px 40px rgba(255, 30, 56, 0.15);
+    }
+    .price-card:hover { transform: translateY(-5px); border-color: var(--red); }
+    .popular-tag {
+      position: absolute; top: -12px; right: 24px;
+      background: var(--red); color: white; font-size: 9px; font-weight: 900;
+      padding: 4px 10px; border-radius: 20px; letter-spacing: 1px;
+      box-shadow: 0 2px 10px var(--red-glow);
+    }
+    .price-card h3 { margin: 0 0 10px; font-size: 20px; }
+    .price-card .desc { color: var(--muted); font-size: 13px; min-height: 40px; margin-bottom: 25px; }
+    .price { font-size: 38px; font-weight: 900; margin-bottom: 25px; color: var(--white); }
+    .price span { font-size: 13px; color: var(--muted); font-weight: normal; }
     
-    .features { 
-      background: linear-gradient(180deg, #66000e 0%, #4a000a 100%); 
-      border-top: 1px solid rgba(255,255,255,0.1);
-    }
-    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 36px; }
-    
-    .card { 
-      padding: 28px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.18); 
-      background: linear-gradient(145deg, rgba(120, 0, 18, 0.7), rgba(70, 0, 10, 0.85)); 
-      backdrop-filter: blur(10px);
-      min-height: 200px; transition: all 0.35s ease;
-      position: relative;
-    }
-    .card:hover { 
-      transform: translateY(-6px); 
-      border-color: rgba(255, 170, 180, 0.5); 
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.35);
-    }
-    .card .symbol { 
-      font-size: 24px; color: #ff8896; margin-bottom: 16px;
-    }
-    .card h3 { margin: 0 0 10px; font-size: 18px; font-weight: 800; }
-    .card p { color: #f3d2d7; line-height: 1.75; font-size: 13px; margin: 0; }
+    .features-list { list-style: none; padding: 0; margin: 0 0 30px; flex-grow: 1; font-size: 13px; color: #d0c2c6; }
+    .features-list li { padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; gap: 10px; }
+    .features-list li::before { content: "✓"; color: #00ff66; font-weight: bold; }
 
-    .fake-panel { 
-      background: linear-gradient(135deg, #a50018 0%, #68000f 60%, #3e0009 100%); 
-      border-top: 1px solid rgba(255,255,255,0.15);
-      border-bottom: 1px solid rgba(255,255,255,0.15);
+    /* Features Grid */
+    .features-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
     }
-    .panel-inner { display: grid; grid-template-columns: 1.2fr .8fr; align-items: center; gap: 40px; position: relative; z-index: 2; }
-    .panel-inner p { color: #f0d5da; line-height: 1.8; font-size: 15px; }
-    
-    .joke-box { 
-      border: 1px solid rgba(255, 255, 255, 0.35); padding: 26px; border-radius: 8px; 
-      background: rgba(60, 0, 9, 0.55); backdrop-filter: blur(12px);
-      box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+    .feature-box {
+      background: var(--panel); border: 1px solid rgba(255,255,255,0.08);
+      padding: 30px; border-radius: 10px; transition: 0.3s;
     }
-    .joke-box strong { display: block; font-size: 13px; letter-spacing: 1.5px; margin-bottom: 10px; color: #ffa2ad; }
-    .joke-box p { font-size: 13px; margin: 0; line-height: 1.8; color: #fce8ec; }
+    .feature-box:hover { border-color: var(--red); background: rgba(25, 10, 14, 0.8); }
+    .feature-box .icon { font-size: 26px; color: var(--red); margin-bottom: 15px; }
+    .feature-box h3 { margin: 0 0 10px; font-size: 16px; }
+    .feature-box p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.6; }
 
-    .community { 
-      text-align: center; 
-      background: linear-gradient(180deg, #4a000a 0%, #330006 100%); 
-    }
-    .community .section-intro { margin: 0 auto 28px; }
+    /* Footer */
+    footer { padding: 30px 20px; border-top: 1px solid rgba(255,255,255,0.08); color: var(--muted); font-size: 12px; }
+    .footer-inner { display: flex; justify-content: space-between; align-items: center; gap: 15px; flex-wrap: wrap; max-width: 1100px; margin: auto; }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a:hover { color: var(--white); }
 
-    footer { 
-      padding: 26px 20px; 
-      border-top: 1px solid rgba(255, 255, 255, 0.15); 
-      color: #e2bdc3; 
-      font-size: 11px; 
-      background: #250004; 
+    /* Modal / Popup for Purchase */
+    .modal-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(8px);
+      display: grid; place-items: center; z-index: 1000; opacity: 0; pointer-events: none; transition: 0.3s;
     }
-    .footer-inner { display: flex; justify-content: space-between; align-items: center; gap: 14px; flex-wrap: wrap; }
-
-    .reveal {
-      opacity: 0;
-      transform: translateY(25px);
-      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    .modal-overlay.active { opacity: 1; pointer-events: auto; }
+    .modal-content {
+      background: #140508; border: 1px solid var(--red); width: min(420px, 90vw);
+      padding: 35px; border-radius: 12px; text-align: center; box-shadow: 0 20px 60px rgba(255,30,56,0.3);
+      transform: scale(0.9); transition: 0.3s;
     }
-    .reveal.active {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    .modal-overlay.active .modal-content { transform: scale(1); }
+    .modal-content h3 { color: var(--red); margin-top: 0; font-size: 22px; }
+    .modal-content p { color: var(--muted); font-size: 13px; line-height: 1.6; margin-bottom: 25px; }
 
     @media (max-width: 768px) {
-      .nav { gap: 14px; font-size: 11px; }
-      .nav .nav-cta { display: none; }
-      .hero { min-height: 540px; padding: 60px 15px; }
-      .cards, .panel-inner { grid-template-columns: 1fr; gap: 18px; }
-      section { padding: 65px 15px; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+      .nav a:not(.partner-link) { display: none; }
     }
   </style>
 </head>
 <body>
+
+  <!-- Top Status Indicator Bar -->
+  <div class="status-bar">
+    <div>SYSTEM STATUS: <span class="live">● VAC BYPASS UNDETECTED</span></div>
+    <div>GAME: LEFT 4 DEAD 2 (VERSUS / CAMPAIGN)</div>
+    <div>ONLINE SURVIVORS: <span id="userCount">1,337</span></div>
+  </div>
+
   <header class="topbar">
-    <a class="wordmark" href="#home">meoware<span>®</span></a>
+    <a class="wordmark" href="index.html">meoware<span>.l4d2</span></a>
     <nav class="nav" aria-label="Navegación principal">
       <a href="#features">Features</a>
-      <a href="#about">About</a>
-      <a href="#community">Community</a>
-      <a class="nav-cta" href="#community">Enter the cat zone ↗</a>
+      <a href="#pricing">Pricing</a>
+      <a href="partners.html" class="partner-link">Partners ↗</a>
+      <a class="btn btn-outline" href="#pricing" style="padding: 6px 14px; font-size: 11px;">Client Login</a>
     </nav>
   </header>
 
   <main>
     <section class="hero" id="home">
       <div class="hero-inner">
-        <div class="notice">THE INTERNET'S MOST SUSPICIOUS CAT</div>
-        <img class="hero-logo" src="meoware.png" alt="meoware — One step ahead of the game, con un gato blanco" onerror="this.onerror=null; this.src='meoware.jpg';">
-        <p>A totally serious-looking gaming project. Powered by paws, questionable decisions, and an unreasonable amount of cat energy.</p>
-        <div class="hero-actions">
-          <a class="btn btn-red" href="#features">Explore the nonsense ↓</a>
-          <a class="btn btn-outline" href="#community">Join the cat club ↗</a>
+        <div class="badge-pill">
+          <span>⚡ UPDATE V4.2 LIVE</span> • DIRECTOR BYPASS & TANK ESP
         </div>
-        <p class="disclaimer">NO SOFTWARE FOR SALE · NO GAME ADVANTAGES</p>
+        <img class="hero-logo" src="meoware.jpg" alt="meoware logo">
+        <p>The ultimate Left 4 Dead 2 elite software suite. Dominate Versus mode, predict every Special Infected pounce, and never get startled by a Witch again.</p>
+        <div class="hero-actions">
+          <a class="btn btn-red" href="#pricing">Get L4D2 Access ↓</a>
+          <a class="btn btn-outline" href="partners.html">View Partners ↗</a>
+        </div>
       </div>
     </section>
 
-    <div class="ticker" aria-label="Mensaje decorativo">
-      <div class="ticker-inner">
-        <div class="ticker-content">
-          <span>MEOWWARE™ &nbsp; • &nbsp; 100% CAT POWERED &nbsp; • &nbsp; ZERO SERIOUSNESS &nbsp; • &nbsp; ONE PAW AHEAD OF THE GAME &nbsp; • &nbsp;</span>
-          <span>MEOWWARE™ &nbsp; • &nbsp; 100% CAT POWERED &nbsp; • &nbsp; ZERO SERIOUSNESS &nbsp; • &nbsp; ONE PAW AHEAD OF THE GAME &nbsp; • &nbsp;</span>
-        </div>
-        <div class="ticker-content" aria-hidden="true">
-          <span>MEOWWARE™ &nbsp; • &nbsp; 100% CAT POWERED &nbsp; • &nbsp; ZERO SERIOUSNESS &nbsp; • &nbsp; ONE PAW AHEAD OF THE GAME &nbsp; • &nbsp;</span>
-          <span>MEOWWARE™ &nbsp; • &nbsp; 100% CAT POWERED &nbsp; • &nbsp; ZERO SERIOUSNESS &nbsp; • &nbsp; ONE PAW AHEAD OF THE GAME &nbsp; • &nbsp;</span>
-        </div>
-      </div>
+    <div class="ticker" aria-label="Anuncio">
+      <span>MEOWARE L4D2 EDITION &nbsp; • &nbsp; 100% VALVE VAC BYPASS &nbsp; • &nbsp; HUNTER POUNCE PREDICTOR &nbsp; • &nbsp; TANK HEALTH & RAGE MONITOR &nbsp; • &nbsp;</span>
     </div>
 
-    <section class="features" id="features">
-      <div class="container reveal">
-        <span class="eyebrow">The totally real feature list</span>
-        <h2>Small cat. Big claims.</h2>
-        <p class="section-intro">A landing page with the dramatic energy of a premium gaming brand — except the only thing we're trying to dominate is your timeline.</p>
-        <div class="cards">
-          <article class="card">
-            <div class="symbol">✦</div>
-            <h3>Advanced Cat Technology</h3>
-            <p>Our proprietary algorithm detects when someone opens a can of tuna. Results may vary by cat.</p>
-          </article>
-          <article class="card">
-            <div class="symbol">◈</div>
-            <h3>Premium Meow Experience</h3>
-            <p>High-end meows, low-resolution decisions, and absolutely no actual competitive advantage.</p>
-          </article>
-          <article class="card">
-            <div class="symbol">⌁</div>
-            <h3>Stealth Mode: Nap</h3>
-            <p>Disappear for 16 hours, then sprint through the house at 3 AM. The ultimate feline lifestyle.</p>
-          </article>
+    <!-- Pricing / Subscription Plans -->
+    <section id="pricing">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow">Flexible Subscriptions</span>
+          <h2>Choose your survivor clearance</h2>
+          <p style="color: var(--muted); font-size: 14px; margin-top: 8px;">Instant loader delivery via webhook. Fully automated imaginary licensing.</p>
+        </div>
+
+        <div class="pricing-grid">
+          <!-- Card 1 -->
+          <div class="price-card">
+            <h3>Campaign Rookie</h3>
+            <div class="desc">For players who just want to survive normal infected hordes with basic assistance.</div>
+            <div class="price">$4.99 <span>/ 30 Days</span></div>
+            <ul class="features-list">
+              <li>Common Infected Glow (ESP)</li>
+              <li>Medkit & Pill Radar</li>
+              <li>Auto-Pills on Low HP</li>
+              <li>Community Discord Access</li>
+            </ul>
+            <button class="btn btn-outline buy-btn" data-plan="Campaign Rookie">Select Plan</button>
+          </div>
+
+          <!-- Card 2 (Featured) -->
+          <div class="price-card featured">
+            <div class="popular-tag">VERSUS META</div>
+            <h3>Versus Master</h3>
+            <div class="desc">Designed to absolutely crush opposing teams in competitive L4D2 Versus matches.</div>
+            <div class="price">$13.37 <span>/ Lifetime</span></div>
+            <ul class="features-list">
+              <li>Special Infected ESP (Hunter, Smoker, Charger, Jockey)</li>
+              <li>Hunter Pounce Trajectory Predictor</li>
+              <li>Tank Health & Rage Bar Monitor</li>
+              <li>Witch Crown Helper / Distance Warning</li>
+              <li>Silent Melee / Auto-Shove Hordes</li>
+            </ul>
+            <button class="btn btn-red buy-btn" data-plan="Versus Master (Lifetime)">Buy Now</button>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="price-card">
+            <h3>Director God</h3>
+            <div class="desc">Absolute control over the game physics and director spawning mechanics.</div>
+            <div class="price">$42.00 <span>/ Forever</span></div>
+            <ul class="features-list">
+              <li>Custom Director Spawn Monitor</li>
+              <li>Source SDK Source Code Access</li>
+              <li>Bypass All Community Server Plugins</li>
+              <li>Direct Line to the Dev Team</li>
+            </ul>
+            <button class="btn btn-outline buy-btn" data-plan="Director God">Select Plan</button>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="fake-panel" id="about">
-      <div class="container panel-inner reveal">
-        <div>
-          <span class="eyebrow" style="color:#ffd6dc">A very important statement</span>
-          <h2>Looks serious.<br>Is absolutely not.</h2>
-          <p class="mb-6">The cat is here purely for comedic purposes.</p>
-          <a class="btn btn-red" href="#community">I understand, meow ↗</a>
+    <!-- Features Section -->
+    <section id="features" style="background: rgba(12, 4, 6, 0.4);">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow">Advanced Engineering</span>
+          <h2>Engineered for maximum survival</h2>
         </div>
-        <aside class="joke-box">
-          <strong>✦ OFFICIAL CAT STATUS</strong>
-          <p>✓ Cute<br>✓ Dramatic red background<br>✓ Unreasonably confident<br>✗ Actually doing anything suspicious</p>
-        </aside>
+        <div class="features-grid">
+          <div class="feature-box">
+            <div class="icon">🎯</div>
+            <h3>Hunter Pounce Predictor</h3>
+            <p>Calculates exact landing trajectories for incoming Hunters before they even leap from rooftops.</p>
+          </div>
+          <div class="feature-box">
+            <div class="icon">🧟</div>
+            <h3>Special Infected ESP</h3>
+            <p>See Smokers pulling teammates, Jockeys latching on, and Chargers through solid walls instantly.</p>
+          </div>
+          <div class="feature-box">
+            <div class="icon">👑</div>
+            <h3>Witch Crown Assistant</h3>
+            <p>Visual crosshair indicator and shotgun spread helper to guarantee a one-shot crown every single time.</p>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section class="community" id="community">
-      <div class="container reveal">
-        <span class="eyebrow">Join the joke</span>
-        <h2>Welcome to the cat side.</h2>
-        <p class="section-intro">Click the discord link below to connect this page to your community. Until then, the cat remains in charge.</p>
-        <a class="btn btn-red" id="discordLink" href="https://discord.com/" target="_blank" rel="noopener">Open Discord ↗</a>
-      </div>
-    </section>
   </main>
 
   <footer>
     <div class="container footer-inner">
-      <span>© <span id="year"></span> meoware — Unofficial parody project.</span>
-      <span>Not affiliated with Aimware or any game developer.</span>
+      <span>© <span id="year"></span> meoware.l4d2. All rights reserved.</span>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="partners.html">Partners</a>
+        <a href="#home">Back to top ↑</a>
+      </div>
     </div>
   </footer>
 
+  <!-- Mock Purchase Modal -->
+  <div class="modal-overlay" id="purchaseModal">
+    <div class="modal-content">
+      <h3>¡Hey you! 🐾</h3>
+      <p id="modalText">Why you trying to buy a <strong id="planName" style="color:var(--white);"></strong>. Get better at the game with practice meow</p>
+      <button class="btn btn-red" id="closeModal" style="width: 100%;">Okay, ¡Miau!</button>
+    </div>
+  </div>
+
   <script>
-    // Discord link and Year setup
-    const DISCORD_INVITE = "https://discord.gg/uP2Rfj2TWR";
-    document.getElementById("discordLink").href = DISCORD_INVITE;
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // Intersection observer for scroll animation
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: "0px 0px -40px 0px"
-    };
+    // Modal Interaction Logic
+    const modal = document.getElementById("purchaseModal");
+    const planNameEl = document.getElementById("planName");
+    const closeModalBtn = document.getElementById("closeModal");
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('active');
-        }
+    document.querySelectorAll(".buy-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const plan = btn.getAttribute("data-plan");
+        planNameEl.textContent = plan;
+        modal.classList.add("active");
       });
-    }, observerOptions);
-
-    document.querySelectorAll('.reveal').forEach(el => {
-      observer.observe(el);
     });
+
+    closeModalBtn.addEventListener("click", () => {
+      modal.classList.remove("active");
+    });
+
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        modal.classList.remove("active");
+      }
+    });
+
+    // Random user count simulation for realism
+    setInterval(() => {
+      const count = 1300 + Math.floor(Math.random() * 85);
+      document.getElementById("userCount").textContent = count.toLocaleString();
+    }, 4000);
   </script>
 </body>
 </html>
